@@ -1,17 +1,31 @@
 import React from 'react'
-import logo  from './logo.svg'
 
 import BasicDropdown from '../components/BasicDropdown'
-import SearchForm     from '../components/SearchForm'
+import SearchForm    from '../components/SearchForm'
 
 const Header = () => {
   return (
     <div className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
       <h1 className="title" style={{ color: '#ddd', fontSize: '1rem' }}>
-        React Search Dropdown App
+        <span>
+          React Search Dropdown App
+        </span>
       </h1>
     </div>
+  )
+}
+
+const Footer = () => {
+  return (
+    <footer className="App-footer">
+      <div className="contact-info">
+        Masatoshi Nishiguchi
+        {' '} &middot; {' '}
+        <a href="http://www.mnishiguchi.com/">
+          mnishiguchi.com
+        </a>
+      </div>
+    </footer>
   )
 }
 
@@ -21,29 +35,33 @@ const App = (props) => {
     <div className="App">
       <Header />
 
-      <section className="section">
-        <div className="container">
-          <div className="heading">
-            <h2 className="title">Basic dropdown</h2>
-            <div className="card">
-              <BasicDropdown>
-                <p>React</p>
-                <p>Angular</p>
-                <p>Vue</p>
-              </BasicDropdown>
+      <main>
+        <section className="section">
+          <div className="container">
+            <div className="heading">
+              <h2 className="title">Basic dropdown</h2>
+              <div className="card">
+                <BasicDropdown>
+                  <p>React</p>
+                  <p>Angular</p>
+                  <p>Vue</p>
+                </BasicDropdown>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section">
-        <div className="container">
-          <div className="heading">
-            <h2 className="title">Search dropdown</h2>
-            <SearchForm />
+        <section className="section">
+          <div className="container">
+            <div className="heading">
+              <h2 className="title">Search dropdown</h2>
+              <SearchForm />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
+
+      <Footer />
     </div>
   )
 }
