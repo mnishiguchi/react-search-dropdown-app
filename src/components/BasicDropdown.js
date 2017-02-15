@@ -1,9 +1,9 @@
 import React, { PropTypes as T } from 'react'
 
-// USAGE: <SearchDropdown>
+// USAGE: <BasicDropdown>
 //          {/* childeren nodes here becomes dropdown items */}
-//        </SearchDropdown>
-class SearchDropdown extends React.Component {
+//        </BasicDropdown>
+class BasicDropdown extends React.Component {
 
     static propTypes = {
         children: T.oneOfType([ T.array, T.element ]).isRequired
@@ -97,4 +97,4 @@ class SearchDropdown extends React.Component {
     }
 }
 
-export default SearchDropdown
+export default BasicDropdown
