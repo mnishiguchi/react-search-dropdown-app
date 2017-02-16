@@ -1,22 +1,25 @@
 import React from 'react'
 
-class RentSelect extends React.Component {
+// Define constants for modes.
+const MODE_MIN = 0
+const MODE_MAX = 1
 
+class RentSelect extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            min     : '',
-            max     : '',
-            mode    : 'min', // min or max
+            min     : null,
+            max     : null,
+            mode    : MODE_MIN, // MODE_MIN or MODE_MAX
             expanded: false
         }
     }
 
     render() {
-
         console.debug(this.state)
 
-        const dropdown = this.state.mode === 'max' ? this.renderMaxDropdown() : this.renderMinDropdown()
+        const dropdown = this.state.mode === MODE_MAX ? this.renderMaxDropdown()
+                                                      : this.renderMinDropdown()
 
         return (
             <div>
@@ -25,11 +28,11 @@ class RentSelect extends React.Component {
                   style={{ width: '100%' }}
                   href="#"
                   title="rents"
-                  onClick={e => this.handleClickTrigger(e) }
+                  onClick={e => this._handleClickTrigger(e) }
                 >
 
                   <div style={{ position: 'relative', width: '100%' }}>
-                    {this.displayText()}
+                    {this._rangeText()}
                     <span style={{ position: 'absolute', right: '0' }}>
                       {this.renderCaret()}
                     </span>
@@ -37,7 +40,7 @@ class RentSelect extends React.Component {
                 </a>
 
                 <aside className="menu">
-                    { this.state.expanded ? dropdown : '' }
+                  { this.state.expanded ? dropdown : '' }
                 </aside>
             </div>
         )
@@ -59,7 +62,7 @@ class RentSelect extends React.Component {
               ref={ input => { this._minInputNode = input }}
               onFocus={e => {
                 e.preventDefault()
-                this.setState({mode: 'min'})
+                this.setState({ mode: MODE_MIN })
               }}
             />
           </div>
@@ -72,7 +75,7 @@ class RentSelect extends React.Component {
               ref={ input => { this._maxInputNode = input }}
               onFocus={e => {
                 e.preventDefault()
-                this.setState({mode: 'max'})
+                this.setState({ mode: MODE_MAX })
               }}
             />
           </div>
@@ -126,66 +129,70 @@ class RentSelect extends React.Component {
     // ---
 
     // Show min max if those values exist.
-    displayText() {
+    _rangeText() {
         const min = parseInt(this.state.min, 10)
         const max = parseInt(this.state.max, 10)
 
         if (min && max) {
-            return `${min} - ${max}`
+            return `$${min} - ${max}`
         } else if (min) {
-            return `${min} <`
+            return `$${min} <`
         } else if (max) {
-            return `< ${max}`
+            return `< $${max}`
         }
 
         return 'Rent range'
     }
 
-    _handleKeyPress(e) {
-      if (e.key === 'Enter') {
-        console.log('enter clicked');
-      }
-    }
-
-    handleClickTrigger(e) {
+    _handleClickTrigger(e) {
         e.preventDefault()
         this.setState({
             expanded: !this.state.expanded,
-            mode: 'min'
+            mode    : MODE_MIN
         })
     }
 
     _handleKeyPress(e) {
+        const { mode } = this.state
+
         if(e.key === 'Enter') {
-            if (this.state.mode === 'min') {
+            if (mode === MODE_MIN) {
                 this._updateMin(this._minInputNode.value)
-            } else if (this.state.mode === 'max') {
+            } else if (mode === MODE_MAX) {
                 this._updateMax(this._maxInputNode.value)
             }
         }
     }
 
     _updateMin(value) {
-        if (this.state.max && this.state.max <= parseInt(value)) {
-          alert("Must be min < max")
-          return
+        const parsedValue = parseInt(value, 10)
+
+        // Refect invalid input.
+        if (this.state.max && this.state.max <= parsedValue) {
+            alert("Must be min < max")
+            return
         }
+
         this.setState({
             expanded: true,
-            mode    : 'max',
-            min     : value
+            mode    : MODE_MAX,
+            min     : parsedValue
         })
     }
 
     _updateMax(value) {
-        if (this.state.min && this.state.min >= parseInt(value)) {
-          alert("Must be min < max")
-          return
+        const parsedValue = parseInt(value, 10)
+
+        // Refect invalid input.
+        if (this.state.min && this.state.min >= parsedValue) {
+            alert("Must be min < max")
+            return
         }
+
         this.setState({
             expanded: false,
-            mode    : 'min',
-            max     : value
+            mode    : MODE_MIN,
+            max     : parsedValue
         })
     }
 }
