@@ -22,20 +22,20 @@ class SearchBar extends React.Component {
         const { searchTerm } = this.state
 
         return (
-          <p className="control">
-            <input
-              className="input"
-              id="q"
-              type="text"
-              placeholder="Address, City, State"
-              ref={ input => { this._inputNode = input }}
-              onChange={e => {
-                e.preventDefault()
-                this.handleInputChange(this._inputNode.value)
-              }}
-            />
-            <span className="help">{searchTerm}</span>
-          </p>
+            <p className="control">
+                <input
+                    className="input"
+                    id="q"
+                    type="text"
+                    placeholder="Address, City, State"
+                    ref={ input => { this._inputNode = input }}
+                    onChange={e => {
+                        e.preventDefault()
+                        this.handleInputChange(this._inputNode.value)
+                    }}
+                />
+                <span className="help">{searchTerm}</span>
+            </p>
         )
     }
 
