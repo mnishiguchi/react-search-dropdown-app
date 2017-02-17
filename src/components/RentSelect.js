@@ -90,34 +90,36 @@ class RentSelect extends React.Component {
     }
 
     renderMinDropdown() {
+        const { min } = this.state
         return (
             <div>
                 {this.renderRange()}
                 <ul className="menu-list min-options">
-                    <li onClick={ e => this._updateMin(null) }><a>No Min</a></li>
-                    <li onClick={ e => this._updateMin(500)  }><a>$500</a></li>
-                    <li onClick={ e => this._updateMin(700)  }><a>$700</a></li>
-                    <li onClick={ e => this._updateMin(900)  }><a>$900</a></li>
-                    <li onClick={ e => this._updateMin(1100) }><a>$1100</a></li>
-                    <li onClick={ e => this._updateMin(1300) }><a>$1300</a></li>
-                    <li onClick={ e => this._updateMin(1500) }><a>$1500</a></li>
+                    <li onClick={ e => this._updateMin(null) }><a className={!min         ? 'is-active' : ''}>No Min</a></li>
+                    <li onClick={ e => this._updateMin(500)  }><a className={min === 500  ? 'is-active' : ''}>$500</a></li>
+                    <li onClick={ e => this._updateMin(700)  }><a className={min === 700  ? 'is-active' : ''}>$700</a></li>
+                    <li onClick={ e => this._updateMin(900)  }><a className={min === 900  ? 'is-active' : ''}>$900</a></li>
+                    <li onClick={ e => this._updateMin(1100) }><a className={min === 1100 ? 'is-active' : ''}>$1100</a></li>
+                    <li onClick={ e => this._updateMin(1300) }><a className={min === 1300 ? 'is-active' : ''}>$1300</a></li>
+                    <li onClick={ e => this._updateMin(1500) }><a className={min === 1500 ? 'is-active' : ''}>$1500</a></li>
                 </ul>
             </div>
         )
     }
 
     renderMaxDropdown() {
+        const { max } = this.state
         return (
             <div>
                 {this.renderRange()}
                 <ul className="menu-list max-options">
-                    <li onClick={ e => this._updateMax(500)  }><a>$500</a></li>
-                    <li onClick={ e => this._updateMax(700)  }><a>$700</a></li>
-                    <li onClick={ e => this._updateMax(900)  }><a>$900</a></li>
-                    <li onClick={ e => this._updateMax(1100) }><a>$1100</a></li>
-                    <li onClick={ e => this._updateMax(1300) }><a>$1300</a></li>
-                    <li onClick={ e => this._updateMax(1500) }><a>$1500</a></li>
-                    <li onClick={ e => this._updateMax(null) }><a>No Max</a></li>
+                    <li onClick={ e => this._updateMax(500)  }><a className={max === 500  ? 'is-active' : ''}>$500</a></li>
+                    <li onClick={ e => this._updateMax(700)  }><a className={max === 700  ? 'is-active' : ''}>$700</a></li>
+                    <li onClick={ e => this._updateMax(900)  }><a className={max === 900  ? 'is-active' : ''}>$900</a></li>
+                    <li onClick={ e => this._updateMax(1100) }><a className={max === 1100 ? 'is-active' : ''}>$1100</a></li>
+                    <li onClick={ e => this._updateMax(1300) }><a className={max === 1300 ? 'is-active' : ''}>$1300</a></li>
+                    <li onClick={ e => this._updateMax(1500) }><a className={max === 1500 ? 'is-active' : ''}>$1500</a></li>
+                    <li onClick={ e => this._updateMax(null) }><a className={!max         ? 'is-active' : ''}>No Max</a></li>
                 </ul>
             </div>
         )
