@@ -64,30 +64,34 @@ class BedBathSelect extends React.Component {
     }
 
     renderBedsDropdown() {
-      return (
-          <div>
-              <h4>Beds</h4>
-              <ul className="menu-list beds-options">
-                  <li onClick={ e => this._updateBeds(null)   }><a>All beds</a></li>
-                  <li onClick={ e => this._updateBeds(STUDIO) }><a>{STUDIO}</a></li>
-                  <li onClick={ e => this._updateBeds(BEDS_1) }><a>{BEDS_1}</a></li>
-                  <li onClick={ e => this._updateBeds(BEDS_2) }><a>{BEDS_2}</a></li>
-                  <li onClick={ e => this._updateBeds(BEDS_3) }><a>{BEDS_3}</a></li>
-                  <li onClick={ e => this._updateBeds(BEDS_4) }><a>{BEDS_4}</a></li>
-              </ul>
-          </div>
-      )
+        const { beds } = this.state
+
+        return (
+            <div>
+                <h4>Beds</h4>
+                <ul className="menu-list beds-options">
+                    <li onClick={ e => this._updateBeds(null)   }><a className={!beds           ? 'is-active' : ''}>All beds</a></li>
+                    <li onClick={ e => this._updateBeds(STUDIO) }><a className={beds === STUDIO ? 'is-active' : ''}>{STUDIO}</a></li>
+                    <li onClick={ e => this._updateBeds(BEDS_1) }><a className={beds === BEDS_1 ? 'is-active' : ''}>{BEDS_1}</a></li>
+                    <li onClick={ e => this._updateBeds(BEDS_2) }><a className={beds === BEDS_2 ? 'is-active' : ''}>{BEDS_2}</a></li>
+                    <li onClick={ e => this._updateBeds(BEDS_3) }><a className={beds === BEDS_3 ? 'is-active' : ''}>{BEDS_3}</a></li>
+                    <li onClick={ e => this._updateBeds(BEDS_4) }><a className={beds === BEDS_4 ? 'is-active' : ''}>{BEDS_4}</a></li>
+                </ul>
+            </div>
+        )
     }
 
     renderBathsDropdown() {
+        const { baths } = this.state
+
         return (
             <div>
                 <h4>Baths</h4>
                 <ul className="menu-list baths-options">
-                    <li onClick={ e => this._updateBaths(null)    }><a>All baths</a></li>
-                    <li onClick={ e => this._updateBaths(BATHS_1) }><a>{BATHS_1}</a></li>
-                    <li onClick={ e => this._updateBaths(BATHS_2) }><a>{BATHS_2}</a></li>
-                    <li onClick={ e => this._updateBaths(BATHS_3) }><a>{BATHS_3}</a></li>
+                    <li onClick={ e => this._updateBaths(null)    }><a className={!baths            ? 'is-active' : ''}>All baths</a></li>
+                    <li onClick={ e => this._updateBaths(BATHS_1) }><a className={baths === BATHS_1 ? 'is-active' : ''}>{BATHS_1}</a></li>
+                    <li onClick={ e => this._updateBaths(BATHS_2) }><a className={baths === BATHS_2 ? 'is-active' : ''}>{BATHS_2}</a></li>
+                    <li onClick={ e => this._updateBaths(BATHS_3) }><a className={baths === BATHS_3 ? 'is-active' : ''}>{BATHS_3}</a></li>
                 </ul>
             </div>
         )
