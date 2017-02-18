@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { PropTypes as T } from 'react'
 
 // Define constants for modes.
 const MODE_MIN = 0
 const MODE_MAX = 1
 
 class RentSelect extends React.Component {
+
+    static propTypes = {
+        handleChangeFormValue: T.func.isRequired,
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -16,8 +21,6 @@ class RentSelect extends React.Component {
     }
 
     render() {
-        console.debug(this.state)
-
         const dropdown = this.state.mode === MODE_MAX ? this.renderMaxDropdown()
                                                       : this.renderMinDropdown()
 
@@ -123,6 +126,15 @@ class RentSelect extends React.Component {
                 </ul>
             </div>
         )
+    }
+
+    // ---
+    // LIFECYCLE METHODS
+    // ---
+
+    componentDidUpdate(prevProps, prevState) {
+        const { handleChangeFormValue } = this.props
+        handleChangeFormValue(this.state)
     }
 
     // ---

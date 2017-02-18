@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes as T } from 'react'
 
 // Modes
 const MODE_BEDS  = 0
@@ -18,6 +18,11 @@ const BATHS_3 = '3+ Baths'
 
 
 class BedBathSelect extends React.Component {
+
+    static propTypes = {
+        handleChangeFormValue: T.func.isRequired,
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -29,8 +34,6 @@ class BedBathSelect extends React.Component {
     }
 
     render() {
-        console.debug(this.state)
-
         return (
             <div>
                 <a
@@ -95,6 +98,15 @@ class BedBathSelect extends React.Component {
                 </ul>
             </div>
         )
+    }
+
+    // ---
+    // LIFECYCLE METHODS
+    // ---
+
+    componentDidUpdate(prevProps, prevState) {
+        const { handleChangeFormValue } = this.props
+        handleChangeFormValue(this.state)
     }
 
     // ---

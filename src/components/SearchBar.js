@@ -1,12 +1,10 @@
-import React  from 'react'
+import React, { PropTypes as T } from 'react'
 
 class SearchBar extends React.Component {
 
-    // static propTypes = {
-    // }
-    //
-    // static defaultProps = {
-    // }
+    static propTypes = {
+        handleChangeFormValue: T.func.isRequired,
+    }
 
     constructor(props) {
         super(props)
@@ -38,6 +36,19 @@ class SearchBar extends React.Component {
             </p>
         )
     }
+
+    // ---
+    // LIFECYCLE METHODS
+    // ---
+
+    componentDidUpdate(prevProps, prevState) {
+        const { handleChangeFormValue } = this.props
+        handleChangeFormValue(this.state)
+    }
+
+    // ---
+    // PRIVATE METHODS
+    // ---
 
      handleInputChange(searchTerm) {
         this.setState({
