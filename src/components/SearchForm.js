@@ -21,7 +21,6 @@ function reducer(formState = FORM_INITIAL_STATE, action) {
                 ...formState,
                 searchTerm
             }
-
         case 'RentSelect':
             const { min, max } = payload
             return {
@@ -29,7 +28,6 @@ function reducer(formState = FORM_INITIAL_STATE, action) {
                 min,
                 max
             }
-
         case 'BedBathSelect':
             const { beds, baths } = payload
             return {
@@ -37,7 +35,6 @@ function reducer(formState = FORM_INITIAL_STATE, action) {
                 beds,
                 baths
             }
-
         default:
             return formState
     }
@@ -55,15 +52,15 @@ class SearchForm extends React.Component {
         return (
             <div className="columns is-mobile box search-box">
                 <div className="column is-5">
-                    <SearchBar handleChangeFormValue={payload => this.handleChangeFormValue({ type: 'SearchBar', payload })} />
+                    <SearchBar dispatchStateChange={payload => this.updateState({ type: 'SearchBar', payload })} />
                 </div>
 
                 <div className="column is-3">
-                    <RentSelect handleChangeFormValue={payload => this.handleChangeFormValue({ type: 'RentSelect', payload })} />
+                    <RentSelect dispatchStateChange={payload => this.updateState({ type: 'RentSelect', payload })} />
                 </div>
 
                 <div className="column is-3">
-                    <BedBathSelect handleChangeFormValue={payload => this.handleChangeFormValue({ type: 'BedBathSelect', payload })} />
+                    <BedBathSelect dispatchStateChange={payload => this.updateState({ type: 'BedBathSelect', payload })} />
                 </div>
 
                 <div className="column is-1">
@@ -73,7 +70,7 @@ class SearchForm extends React.Component {
         )
     }
 
-    handleChangeFormValue(action) {
+    updateState(action) {
         // Create a new form state using the reducer.
         this._form = reducer(this._form, action)
 

@@ -3,7 +3,7 @@ import React, { PropTypes as T } from 'react'
 class SearchBar extends React.Component {
 
     static propTypes = {
-        handleChangeFormValue: T.func.isRequired,
+        dispatchStateChange: T.func.isRequired,
     }
 
     constructor(props) {
@@ -42,8 +42,8 @@ class SearchBar extends React.Component {
     // ---
 
     componentDidUpdate(prevProps, prevState) {
-        const { handleChangeFormValue } = this.props
-        handleChangeFormValue(this.state)
+        const { dispatchStateChange } = this.props
+        dispatchStateChange(this.state)
     }
 
     // ---

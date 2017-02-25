@@ -7,7 +7,7 @@ const MODE_MAX = 1
 class RentSelect extends React.Component {
 
     static propTypes = {
-        handleChangeFormValue: T.func.isRequired,
+        dispatchStateChange: T.func.isRequired,
     }
 
     constructor(props) {
@@ -53,7 +53,7 @@ class RentSelect extends React.Component {
             <div
                 className="columns range-container"
                 style={{ padding: '0', margin: '0' }}
-                onKeyPress={e => this._handleKeyPress(e)}
+                onKeyDown={e => this._handleKeyDown(e)}
             >
                 <div className="column is-6 left-input">
                     <input
@@ -133,8 +133,8 @@ class RentSelect extends React.Component {
     // ---
 
     componentDidUpdate(prevProps, prevState) {
-        const { handleChangeFormValue } = this.props
-        handleChangeFormValue(this.state)
+        const { dispatchStateChange } = this.props
+        dispatchStateChange(this.state)
     }
 
     // ---
@@ -165,10 +165,18 @@ class RentSelect extends React.Component {
         })
     }
 
-    _handleKeyPress(e) {
+    _handleKeyDown(e) {
         const { mode } = this.state
+        // console.debug(e.key)
+        // console.debug(e.target.value)
 
-        if(e.key === 'Enter') {
+        // Reject if the field is blank.
+        if(!e.target.value) {
+            return null
+        }
+
+        // Update the form if Enter or Tab key was pressed.
+        if(e.key === 'Enter' || e.key === 'Tab') {
             if (mode === MODE_MIN) {
                 this._updateMin(this._minInputNode.value)
             } else if (mode === MODE_MAX) {
